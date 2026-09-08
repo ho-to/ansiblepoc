@@ -1,0 +1,16 @@
+---
+- name: Nginx をインストールして起動する
+  hosts: local
+  become: true
+
+  tasks:
+    - name: Nginxをインストール
+      apt:
+        name: nginx
+        state: present
+        update_cache: true
+
+    - name: Nginxを起動
+      service:
+        name: nginx
+        state: started
