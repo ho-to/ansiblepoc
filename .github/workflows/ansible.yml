@@ -1,0 +1,23 @@
+name: Ansible 動作確認
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  ansible:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ansibleをインストール
+        run: pip install ansible
+
+      - name: Playbookを実行
+        run: ansible-playbook ansible/playbook.yml -i ansible/hosts.ini -v
+
+      - name: 動作確認
+        run: curl -s http://localhost | head -10
